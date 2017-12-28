@@ -10,8 +10,12 @@ import java.util.Properties;
 
 public class ConnectionUtil {
     public static Connection getConnection() throws SQLException, IOException {
+
+        // magic
+        // DriverManager.registerDriver(new OracleDriver());
+
         Properties prop = new Properties();
-        InputStream in = new FileInputStream("connection.properties");
+        InputStream in = new FileInputStream("src/main/resources/connection.properties");
         prop.load(in);
 
         String url = prop.getProperty("url");
