@@ -6,8 +6,8 @@ public class Employee {
     private int employeeId;
     private String lastName;
     private String firstName;
-    private Employee supervisor;
-    private Department department;
+    private int supervisor;
+    private int department;
     private boolean isBenefitCoodinator;
     private String email;
     private String title;
@@ -44,19 +44,19 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    public Employee getSupervisor() {
+    public int getSupervisor() {
         return supervisor;
     }
 
-    public void setSupervisor(Employee supervisor) {
+    public void setSupervisor(int supervisor) {
         this.supervisor = supervisor;
     }
 
-    public Department getDepartment() {
+    public int getDepartment() {
         return department;
     }
 
-    public void setDepartment(Department department) {
+    public void setDepartment(int department) {
         this.department = department;
     }
 

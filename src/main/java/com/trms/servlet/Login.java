@@ -8,6 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trms.database.DatabaseAccessor;
+import com.trms.database.dao.Employee;
+
 /**
  * Servlet implementation class Login TODO implement log4j, create DAOs for
  * datasets, get/post employee
@@ -28,9 +32,13 @@ public class Login extends HttpServlet {
      *      response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getParameter("email");
-        System.out.println("Hello?");
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        String email = request.getParameter("email");
+        System.out.println("Request email: " + email);
+        DatabaseAccessor databaseAccessor = new DatabaseAccessor();
+        Employee employee = databaseAccessor.getEmployee(email);
+        ObjectMapper mapper = new ObjectMapper();
+        String employeeJson = mapper.writeValueAsString(employee);
+        response.getWriter().write(employeeJson);
     }
 
     /**
@@ -38,8 +46,6 @@ public class Login extends HttpServlet {
      *      response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
         doGet(request, response);
     }
-
 }

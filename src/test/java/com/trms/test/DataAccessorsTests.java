@@ -11,7 +11,15 @@ public class DataAccessorsTests {
     public void test() {
         DatabaseAccessor databaseAccessor = new DatabaseAccessor();
         Employee employee = databaseAccessor.getEmployee("regop412@gmail.com");
-        org.junit.Assert.assertTrue(employee.getEmployeeId() == 2);
+        org.junit.Assert.assertTrue(employee.getEmployeeId() == 1);
+
+    }
+
+    @Test
+    public void test2() {
+        DatabaseAccessor databaseAccessor = new DatabaseAccessor();
+        Employee employee = databaseAccessor.getEmployee("regop412@gmail.com");
+        org.junit.Assert.assertTrue(employee.getEmployeeId() == 1);
 
     }
 

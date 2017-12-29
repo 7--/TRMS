@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.trms.database.ConnectionUtil;
 import com.trms.database.dao.Employee;
 
 public class DatabaseAccessor {
@@ -22,21 +21,32 @@ public class DatabaseAccessor {
     }
 
     public Employee getEmployee(String email) {
-        String sql = "SELECT * FROM Employee where EMAIL  ='?';";
+        String sql = "SELECT * FROM Employee where EMAIL = ?";
         Employee employee = new Employee();
         try {
             PreparedStatement prepareStatment = connection.prepareStatement(sql);
             prepareStatment.setString(1, email);
+
             ResultSet resultSet = prepareStatment.executeQuery();
             while (resultSet.next()) {
                 employee.setEmployeeId(resultSet.getInt(1));
-
+                employee.setLastName(resultSet.getString(2));
+                employee.setFirstName(resultSet.getString(3));
+                employee.setSupervisor(resultSet.getInt(4));
+                employee.setDepartment(resultSet.getInt(5));
+                employee.setBenefitCoodinator(resultSet.getBoolean(6));
+                employee.setEmail(resultSet.getString(7));
             }
         } catch (SQLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         return employee;
 
     }
+
+    public Employee getEducationRequests(int employeeId) {
+
+        return null;
+    }
+
 }
