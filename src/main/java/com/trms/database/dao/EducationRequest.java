@@ -1,6 +1,7 @@
 package com.trms.database.dao;
 
 import java.sql.Date;
+import java.util.Calendar;
 
 public class EducationRequest {
     private int educationRequestId;
@@ -69,7 +70,16 @@ public class EducationRequest {
     }
 
     public void setStartDate(Date startDate) {
-        this.startDate = startDate;
+        // day is set a day behind for some reason, so I'm adding a day
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(startDate);
+        cal.add(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        this.startDate = new java.sql.Date(cal.getTimeInMillis());
+
     }
 
     public Date getEndDate() {
@@ -77,7 +87,15 @@ public class EducationRequest {
     }
 
     public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+        // day is set a day behind for some reason, so I'm adding a day
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(endDate);
+        cal.add(Calendar.DAY_OF_YEAR, 1);
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        this.endDate = new java.sql.Date(cal.getTimeInMillis());
     }
 
     public int getDaysOff() {

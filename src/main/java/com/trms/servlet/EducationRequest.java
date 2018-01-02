@@ -26,14 +26,7 @@ public class EducationRequest extends HttpServlet {
 
         ObjectMapper mapper = new ObjectMapper();
         com.trms.database.dao.EducationRequest educationRequest = mapper.readValue(request.getInputStream(), com.trms.database.dao.EducationRequest.class);
-        // StringBuilder buffer = new StringBuilder();
-        // BufferedReader reader = request.getReader();
-        // String line;
-        // while ((line = reader.readLine()) != null) {
-        // buffer.append(line);
-        // }
-        // String data = buffer.toString();
-        // System.out.println("its hit " + data);
+
         System.out.println("Edu req obj: " + educationRequest);
         DatabaseAccessor databaseAccessor = new DatabaseAccessor();
         databaseAccessor.insertEducationRequest(educationRequest);
