@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.trms.database.dao.Employee;
 
@@ -42,6 +43,22 @@ public class DatabaseAccessor {
         }
         return employee;
 
+    }
+
+    public boolean insertEducationRequest(com.trms.database.dao.EducationRequest educationRequest) {
+        // create a Statement from the connection
+        Statement statement;
+        try {
+            statement = connection.createStatement();
+            statement.executeUpdate("INSERT INTO Customers " + "VALUES (1001, 'Simpson', 'Mr.', 'Springfield', 2001)");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+        // insert the data
+        return true;
     }
 
     public Employee getEducationRequests(int employeeId) {

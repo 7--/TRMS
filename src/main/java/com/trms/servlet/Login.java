@@ -39,8 +39,6 @@ public class Login extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
         String employeeJson = mapper.writeValueAsString(employee);
 
-        response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
-        response.setHeader("Content-Type", "application/json");
         response.getWriter().write(employeeJson);
     }
 

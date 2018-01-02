@@ -12,8 +12,14 @@ public class EducationRequest {
     private Timestamp endDate;
     private int daysOff;
     private String location;
-    private String Justification;
+    private String justification;
     private int cost;
+
+    @Override
+    public String toString() {
+        return "EducationRequest [educationRequestId=" + educationRequestId + ", employeeId=" + employeeId + ", supervisorApproval=" + supervisorApproval + ", departmentHeadApproval=" + departmentHeadApproval + ", benefitCoodinatorApproval=" + benefitCoodinatorApproval + ", startDate=" + startDate + ", endDate=" + endDate + ", daysOff=" + daysOff + ", location=" + location + ", justification=" + justification + ", cost=" + cost + ", presetationDocumentPath=" + presetationDocumentPath + ", reimbursmentPaid=" + reimbursmentPaid + ", type=" + type + "]";
+    }
+
     private String presetationDocumentPath;
     private boolean reimbursmentPaid;
     private int type;
@@ -91,11 +97,11 @@ public class EducationRequest {
     }
 
     public String getJustification() {
-        return Justification;
+        return justification;
     }
 
     public void setJustification(String justification) {
-        Justification = justification;
+        this.justification = justification;
     }
 
     public int getCost() {
