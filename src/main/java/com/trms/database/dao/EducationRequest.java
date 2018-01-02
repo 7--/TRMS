@@ -1,6 +1,6 @@
 package com.trms.database.dao;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 
 public class EducationRequest {
     private int educationRequestId;
@@ -8,8 +8,8 @@ public class EducationRequest {
     private boolean supervisorApproval;
     private boolean departmentHeadApproval;
     private boolean benefitCoodinatorApproval;
-    private Timestamp startDate;
-    private Timestamp endDate;
+    private Date startDate;
+    private Date endDate;
     private int daysOff;
     private String location;
     private String justification;
@@ -64,19 +64,19 @@ public class EducationRequest {
         this.benefitCoodinatorApproval = benefitCoodinatorApproval;
     }
 
-    public Timestamp getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Timestamp startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public Timestamp getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Timestamp endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 

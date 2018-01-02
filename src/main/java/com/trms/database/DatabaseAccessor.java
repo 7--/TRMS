@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import com.trms.database.dao.Employee;
 
@@ -47,11 +46,18 @@ public class DatabaseAccessor {
 
     public boolean insertEducationRequest(com.trms.database.dao.EducationRequest educationRequest) {
         // create a Statement from the connection
-        Statement statement;
+        String sql = "INSERT INTO EducationRequest(EmployeeId, startDate, endDate, daysOff, location, justification, cost, type)" + "values(?,?,?,?,?,?,?,?)";
         try {
-            statement = connection.createStatement();
-            statement.executeUpdate("INSERT INTO Customers " + "VALUES (1001, 'Simpson', 'Mr.', 'Springfield', 2001)");
-
+            PreparedStatement prepareStatment = connection.prepareStatement(sql);
+            prepareStatment.setLong(1, educationRequest.getEmployeeId());
+            prepareStatment.setDate(2, educationRequest.getStartDate());
+            prepareStatment.setDate(3, educationRequest.getEndDate());
+            prepareStatment.setLong(4, educationRequest.getDaysOff());
+            prepareStatment.setString(5, educationRequest.getLocation());
+            prepareStatment.setString(6, educationRequest.getJustification());
+            prepareStatment.setLong(7, educationRequest.getCost());
+            prepareStatment.setLong(8, educationRequest.getType());
+            prepareStatment.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

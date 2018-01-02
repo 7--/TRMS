@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.trms.database.DatabaseAccessor;
 
 @WebServlet(urlPatterns = "/EducationRequest")
 public class EducationRequest extends HttpServlet {
@@ -34,6 +35,9 @@ public class EducationRequest extends HttpServlet {
         // String data = buffer.toString();
         // System.out.println("its hit " + data);
         System.out.println("Edu req obj: " + educationRequest);
+        DatabaseAccessor databaseAccessor = new DatabaseAccessor();
+        databaseAccessor.insertEducationRequest(educationRequest);
+
     }
 
 }
