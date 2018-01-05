@@ -1,6 +1,7 @@
 package com.trms.servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,8 +18,21 @@ public class EducationRequest extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("educatin request GET called");
-        response.getWriter().append("Served at: ").append(request.getContextPath());
+        String employeeId = request.getParameter("employee_id");
+        ArrayList<com.trms.database.dao.EducationRequest> educationRequestList = new ArrayList<com.trms.database.dao.EducationRequest>();
+        if (employeeId != null) {
+            int employeeIdInt = Integer.parseInt(employeeId);
+            System.out.println("employee id: " + employeeId);
+            DatabaseAccessor databaseAccessor = new DatabaseAccessor();
+            educationRequestList = databaseAccessor.getEducationRequests(employeeIdInt);
+        }
+        for (com.trms.database.dao.EducationRequest educationRequest : educationRequestList) {
+            System.out.println("EdReq toString: " + educationRequest.toString());
+        }
+        ObjectMapper mapper = new ObjectMapper();
+        String employeeJson = mapper.writeValueAsString(educationRequestList);
+
+        response.getWriter().write(employeeJson);
     }
 
     @Override
