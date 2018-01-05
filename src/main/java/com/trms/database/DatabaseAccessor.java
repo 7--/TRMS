@@ -103,4 +103,55 @@ public class DatabaseAccessor {
         return educationRequestList;
     }
 
+    /*
+     * Fetches the requests given employee can supervisor approve
+     */
+    public ArrayList<EducationRequest> getRequestsSupervisorApprove(int employeeId) {
+        String sql = "SELECT * FROM EducationRequest JOIN EMPLOYEE ON EducationRequest.employeeid = EMPLOYEE.employeeid WHERE supervisor = ?";
+        ArrayList<EducationRequest> educationRequestList = new ArrayList<EducationRequest>();
+        try {
+            PreparedStatement prepareStatment = connection.prepareStatement(sql);
+            prepareStatment.setInt(1, employeeId);
+            ResultSet resultSet = prepareStatment.executeQuery();
+
+            while (resultSet.next()) {
+                EducationRequest educationRequest = new EducationRequest();
+                educationRequest.setEducationRequestId(resultSet.getInt(1));
+                educationRequest.setEmployeeId(resultSet.getInt(2));
+                educationRequest.setSupervisorApproval(resultSet.getBoolean(3));
+                educationRequest.setDepartmentHeadApproval(resultSet.getBoolean(4));
+                educationRequest.setBenefitCoodinatorApproval(resultSet.getBoolean(5));
+                educationRequest.setStartDate(resultSet.getDate(6));
+                educationRequest.setEndDate(resultSet.getDate(7));
+                educationRequest.setDaysOff(resultSet.getInt(8));
+                educationRequest.setLocation(resultSet.getString(9));
+                educationRequest.setJustification(resultSet.getString(10));
+                educationRequest.setCost(resultSet.getInt(11));
+                educationRequest.setPresetationDocumentPath(resultSet.getString(12));
+                educationRequest.setReimbursmentPaid(resultSet.getBoolean(13));
+                educationRequest.setType(resultSet.getInt(14));
+
+                educationRequestList.add(educationRequest);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+        return educationRequestList;
+    }
+
+    public boolean SupApr(int supAprReqIdInt) {
+        String sql = "Update EducationRequest set SUPERVISORAPPROVAL = 1 where EDUCATIONREQUESTID=?";
+        try {
+            PreparedStatement prepareStatment = connection.prepareStatement(sql);
+            prepareStatment.setLong(1, supAprReqIdInt);
+            prepareStatment.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+
 }
